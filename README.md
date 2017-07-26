@@ -1,0 +1,2 @@
+# SimpleMutiTypeAdapter
+一个方法实现RecyclerView多条目类型
