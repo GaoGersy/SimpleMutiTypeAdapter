@@ -5,11 +5,21 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
         tools:context="com.example.gersy.multitype.MainActivity"
         >
-<android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+    <Button
+            android:text="MultiBean多条目"
+            android:onClick="toMultiBean"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+    <Button
+            android:text="MultiLayout多条目"
+            android:onClick="toMultiLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
 </LinearLayout>

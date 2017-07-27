@@ -6,7 +6,7 @@ import com.gersion.library.inter.IMultiLayout;
  * Created by gersy on 2017/7/26.
  */
 
-public class UserBean implements IMultiLayout{
+public class LocationMsgBean implements IMultiLayout{
     public String userName;
     public int age;
 
