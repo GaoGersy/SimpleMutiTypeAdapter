@@ -27,6 +27,12 @@ import android.view.ViewGroup;
 public interface TypePool {
 
     void register(Class clazz,int layouId);
+
+    void register(int layoutId);
+
     RecyclerView.ViewHolder getViewHolder(ViewGroup parent,int itemType);
+
     int getItemType(Class clazz);
+
+    int getItemType(int layoutId);
 }

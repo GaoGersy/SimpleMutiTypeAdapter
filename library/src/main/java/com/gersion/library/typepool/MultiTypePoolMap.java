@@ -45,6 +45,11 @@ public class MultiTypePoolMap implements TypePool {
         mTypeArrayMap.put(clazz, type);
     }
 
+    @Override
+    public void register(int layoutId) {
+
+    }
+
     public RecyclerView.ViewHolder getViewHolder(ViewGroup parent, int itemType) {
 
         Set<Map.Entry<Class, Type>> entries = mTypeArrayMap.entrySet();
@@ -71,6 +76,11 @@ public class MultiTypePoolMap implements TypePool {
 
         }
         throw new IllegalStateException(clazz+" 没有注册,请检查..");
+    }
+
+    @Override
+    public int getItemType(int layoutId) {
+        return 0;
     }
 
 

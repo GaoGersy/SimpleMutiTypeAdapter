@@ -46,6 +46,11 @@ public class MultiTypePoolList implements TypePool {
         mTypes.add(type);
     }
 
+    @Override
+    public void register(int layoutId) {
+
+    }
+
     private boolean checkIsRegistered(Class clazz) {
         for (Type type : mTypes) {
             if (type.clazz == clazz){
@@ -68,6 +73,11 @@ public class MultiTypePoolList implements TypePool {
             }
         }
         throw new IllegalStateException(clazz+" 没有注册,请检查..");
+    }
+
+    @Override
+    public int getItemType(int layoutId) {
+        return 0;
     }
 
 

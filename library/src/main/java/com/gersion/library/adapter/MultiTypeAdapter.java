@@ -17,14 +17,13 @@
 package com.gersion.library.adapter;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.util.ArrayMap;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.gersion.library.typepool.MultiTypePoolList;
+import com.gersion.library.inter.IMultiLayout;
+import com.gersion.library.typepool.MultiBeanListPool;
+import com.gersion.library.typepool.MultiLayoutListPool;
 import com.gersion.library.typepool.TypePool;
 import com.gersion.library.viewholder.BaseViewHolder;
 
@@ -35,17 +34,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * @author drakeet
  */
-public abstract class MultiTypeAdapter <T , K >extends RecyclerView.Adapter<ViewHolder> {
+public abstract class MultiTypeAdapter<T, K> extends RecyclerView.Adapter<ViewHolder> {
 
     private static final String TAG = "MultiTypeAdapter";
 
-    protected  @NonNull List<T> items;
-    protected List<T> mSelectionList = new ArrayList<>();
-    private @NonNull
-    TypePool typePool;
-    protected @Nullable LayoutInflater inflater;
-    private @NonNull final ArrayMap<Class,Integer> mTypeArrayMap = new ArrayMap<>();
-
+    protected List<T> items;
+    private TypePool typePool;
+    //用来判断是使用了哪种注册类型< -1-还没使用过，0-多布局 ，1- 多Bean>
+    private int registerType = -1;
+    private static final int MULTI_LAYOUT = 0;
+    private static final int MULTI_BEAN = 1;
 
     /**
      * Constructs a MultiTypeAdapter with an empty items list.
@@ -61,7 +59,7 @@ public abstract class MultiTypeAdapter <T , K >extends RecyclerView.Adapter<View
      * @param items the items list
      */
     public MultiTypeAdapter(@NonNull List<T> items) {
-        this(items, new MultiTypePoolList());
+        this(items, null);
     }
 
 
@@ -76,10 +74,29 @@ public abstract class MultiTypeAdapter <T , K >extends RecyclerView.Adapter<View
         this.typePool = pool;
     }
 
-    public void register(Class clazz,int layoutId){
-        typePool.register(clazz,layoutId);
+    //注册多个bean 对应多个或单个布局
+    public void registerMultiBean(Class clazz, int layoutId) {
+        if (registerType == MULTI_LAYOUT) {
+            throw new IllegalStateException("您已经使用过registerMultiLayout()方法，不能再使用registerMultiBean()注册，二者互斥");
+        }
+        registerType = MULTI_BEAN;
+        if (typePool==null) {
+            typePool = new MultiBeanListPool();
+        }
+        typePool.register(clazz, layoutId);
     }
 
+    //注册一个bean对应多个布局
+    public void registerMultiLayout(int layoutId) {
+        if (registerType == MULTI_BEAN) {
+            throw new IllegalStateException("您已经使用过registerMultiBean()方法，不能再使用registerMultiLayout()注册，二者互斥");
+        }
+        registerType = MULTI_LAYOUT;
+        if (typePool==null) {
+            typePool = new MultiLayoutListPool();
+        }
+        typePool.register(layoutId);
+    }
 
     /**
      * Sets and updates the items atomically and safely. It is recommended to use this method
@@ -121,8 +138,15 @@ public abstract class MultiTypeAdapter <T , K >extends RecyclerView.Adapter<View
 
     @Override
     public final int getItemViewType(int position) {
-        Object item = items.get(position);
-        int itemType = typePool.getItemType(item.getClass());
+        int itemType = -1;
+        if (registerType == MULTI_LAYOUT) {
+            IMultiLayout item = (IMultiLayout) items.get(position);
+            int layoutId = item.getLayoutId();
+            itemType = typePool.getItemType(layoutId);
+        } else {
+            Object item = items.get(position);
+            itemType = typePool.getItemType(item.getClass());
+        }
         return itemType;
     }
 
