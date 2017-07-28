@@ -1,5 +1,5 @@
 # SimpleMutiTypeAdapter
-#####一个方法实现RecyclerView多条目类型
+##### 一个方法实现RecyclerView多条目类型
 
 >作为一名有经经验的程序猿，你肯定用过各种RecyclerView多条目的框架，但是我猜你应该还没用过这么简单的。
 
@@ -54,8 +54,8 @@ adapter.registerMultiLayout(R.layout.item_time_line);
 public class MultiLayoutAdapter extends 
         MultiTypeAdapter<IMultiLayout,BaseViewHolder<IMultiLayout>> {
 
-    @Override
-    protected void convert(BaseViewHolder helper, IMultiLayout item) {
+@Override
+protected void convert(BaseViewHolder helper, IMultiLayout item) {
         MsgBean bean = (MsgBean) item;
         int type = bean.type;
         if (type==0||type==1){
@@ -151,7 +151,7 @@ public int getItemType(Class clazz) {
 
 >大家伙正准备扫兴的散去，忽然店家拿出一大袋的字符，足足有刚才的两倍那么多;说时迟那时快， 只听哐当一声，字符散落了一地;没错，接下来是对MultiLayoutListPool的介绍：
 ```
-	public void register(int layoutId) {
+public void register(int layoutId) {
         if (checkIsRegistered(layoutId)) {
             throw new IllegalStateException("layoutId = "+layoutId + " 已经注册过，请不要重复注册");
         }
@@ -177,7 +177,7 @@ public int getItemType(Class clazz) {
 
 >看到上面字符有些人不干了(这个跟上面不是一样吗？这还用贴？小编收了5毛，小编凑字数，开启开挂式的吐槽模式);店家没有理会，继续着自己的回忆：
 ```
-	public final int getItemViewType(int position) {
+public final int getItemViewType(int position) {
         int itemType = -1;
         if (registerType == MULTI_LAYOUT) {
             IMultiLayout item = (IMultiLayout) items.get(position);
