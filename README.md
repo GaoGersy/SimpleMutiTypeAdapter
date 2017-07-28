@@ -6,6 +6,8 @@
 >​						Talk is cheap,show me the GIF!
 
 ![效果图](https://github.com/GaoGersy/SimpleMutiTypeAdapter/blob/master/image/Multi.gif)
+
+
 [SimpleMutiTypeAdapter](https://github.com/GaoGersy/SimpleMutiTypeAdapter)
 ##### 先来看看使用
 ###### 首发、一个Bean对应一个layout 或者多个layout对应一个Bean
