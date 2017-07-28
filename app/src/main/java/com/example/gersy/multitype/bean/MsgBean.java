@@ -10,7 +10,8 @@ import com.gersion.library.inter.IMultiLayout;
 public class MsgBean implements IMultiLayout {
     public boolean left = true;
     public String msg;
-    public int type;//0:左边的文字 1：右边的文字 2：左边的图片 3：右边的图片 4：左边的定位 5：右边的定位 6：时间线
+    public int type;//0:左边的文字 1：右边的文字 2：左边的图片 3：右边的图片
+                    // 4：左边的定位 5：右边的定位 6：时间线
     int layoutId;
     @Override
     public int getLayoutId() {

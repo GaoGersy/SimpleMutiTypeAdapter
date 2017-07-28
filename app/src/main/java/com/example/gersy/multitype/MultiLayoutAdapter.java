@@ -9,7 +9,8 @@ import com.gersion.library.viewholder.BaseViewHolder;
  * Created by gersy on 2017/7/26.
  */
 
-public class MultiLayoutAdapter extends MultiTypeAdapter<IMultiLayout,BaseViewHolder<IMultiLayout>> {
+public class MultiLayoutAdapter extends
+        MultiTypeAdapter<IMultiLayout,BaseViewHolder<IMultiLayout>> {
 
     @Override
     protected void convert(BaseViewHolder helper, IMultiLayout item) {
