@@ -1,6 +1,21 @@
 # SimpleMutiTypeAdapter
 ##### 一个方法实现RecyclerView多条目类型
 
+##### 如何使用？
+在项目级build.gradle加入
+```
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+在module级build.gradle加入
+```
+compile 'com.github.GaoGersy:SimpleMutiTypeAdapter:1.0.0'
+```
+
 >作为一名有经经验的程序猿，你肯定用过各种RecyclerView多条目的框架，但是我猜你应该还没用过这么简单的。
 
 >​						Talk is cheap,show me the GIF!
