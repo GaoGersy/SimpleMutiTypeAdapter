@@ -1,11 +1,13 @@
 # SimpleMutiTypeAdapter
-#####一个方法实现RecyclerView多条目类型
+##### 一个方法实现RecyclerView多条目类型
 
 >作为一名有经经验的程序猿，你肯定用过各种RecyclerView多条目的框架，但是我猜你应该还没用过这么简单的。
 
 >​						Talk is cheap,show me the GIF!
 
 ![效果图](https://github.com/GaoGersy/SimpleMutiTypeAdapter/blob/master/image/Multi.gif)
+
+
 [SimpleMutiTypeAdapter](https://github.com/GaoGersy/SimpleMutiTypeAdapter)
 ##### 先来看看使用
 ###### 首发、一个Bean对应一个layout 或者多个layout对应一个Bean
@@ -34,7 +36,7 @@ public class MultiBeanAdapter extends MultiTypeAdapter {
 ```
 >打完收工 ! 什么 ? 你还没看过瘾 ? 大哥，跟多条目相关的代码真的只有这么多。不信你自己去看Demo....我再怎么掺水你也不会给钱不是！
 
-######第二发、一个Bean对应多个Layout。
+###### 第二发、一个Bean对应多个Layout。
 >看到这里你可能要郁闷了，上面的不是已经解决了多条目的问题了，还写个这个干嘛，多此一举。大兄弟，等你看完了demo的代码，估计你要把大腿都要拍肿了（我靠，原来是这样...）。 杀鸡焉用牛刀，宰牛用杀鸡也干不成活不是?
 >真是啰嗦的不行，还不赶快给大爷上代码？不远处漂来一句不耐烦的抱怨声....
 >那按例先上注册的代码尝尝鲜：
@@ -54,8 +56,8 @@ adapter.registerMultiLayout(R.layout.item_time_line);
 public class MultiLayoutAdapter extends 
         MultiTypeAdapter<IMultiLayout,BaseViewHolder<IMultiLayout>> {
 
-    @Override
-    protected void convert(BaseViewHolder helper, IMultiLayout item) {
+@Override
+protected void convert(BaseViewHolder helper, IMultiLayout item) {
         MsgBean bean = (MsgBean) item;
         int type = bean.type;
         if (type==0||type==1){
@@ -151,7 +153,7 @@ public int getItemType(Class clazz) {
 
 >大家伙正准备扫兴的散去，忽然店家拿出一大袋的字符，足足有刚才的两倍那么多;说时迟那时快， 只听哐当一声，字符散落了一地;没错，接下来是对MultiLayoutListPool的介绍：
 ```
-	public void register(int layoutId) {
+public void register(int layoutId) {
         if (checkIsRegistered(layoutId)) {
             throw new IllegalStateException("layoutId = "+layoutId + " 已经注册过，请不要重复注册");
         }
@@ -177,7 +179,7 @@ public int getItemType(Class clazz) {
 
 >看到上面字符有些人不干了(这个跟上面不是一样吗？这还用贴？小编收了5毛，小编凑字数，开启开挂式的吐槽模式);店家没有理会，继续着自己的回忆：
 ```
-	public final int getItemViewType(int position) {
+public final int getItemViewType(int position) {
         int itemType = -1;
         if (registerType == MULTI_LAYOUT) {
             IMultiLayout item = (IMultiLayout) items.get(position);
